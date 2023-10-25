@@ -40,7 +40,7 @@ textarea {
 }
 
 /* Button styling */
-button {
+#simpan {
     background-color: #007BFF;
     color: #fff;
     padding: 10px 20px;
@@ -49,34 +49,21 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background-color: #0056b3;
-}
-
-/* Popup styling */
-.popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+#simpan:hover {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    z-index: 999;
+    color: #007BFF;
 }
 
-.popup-content {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.popup-close {
-    background-color: #007BFF;
+#selesai {
+    background-color: #026121;
     color: #fff;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+#selesai:hover {
+    background-color: #fff;
+    color: #026121;
 }

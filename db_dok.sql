@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2023 at 09:02 AM
+-- Generation Time: Oct 25, 2023 at 10:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -24,13 +24,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gbr_langkah`
+-- Table structure for table `gbr_dok`
 --
 
-CREATE TABLE `gbr_langkah` (
+CREATE TABLE `gbr_dok` (
   `id` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `kode` varchar(10) NOT NULL
+  `kode_gambar` varchar(30) NOT NULL,
+  `nama` varchar(30) NOT NULL,
+  `kode_dok` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -41,21 +42,22 @@ CREATE TABLE `gbr_langkah` (
 
 CREATE TABLE `judul_dok` (
   `id` int(11) NOT NULL,
-  `cover` varchar(255) DEFAULT NULL,
-  `judul` varchar(255) DEFAULT NULL,
-  `kode` varchar(255) DEFAULT NULL
+  `cover` varchar(30) NOT NULL,
+  `judul` varchar(200) NOT NULL,
+  `kode` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ket_langkah`
+-- Table structure for table `ket_dok`
 --
 
-CREATE TABLE `ket_langkah` (
+CREATE TABLE `ket_dok` (
   `id` int(11) NOT NULL,
-  `kode` varchar(20) NOT NULL,
-  `keterangan` varchar(100) NOT NULL
+  `kode_ket` varchar(30) NOT NULL,
+  `keterangan` varchar(500) NOT NULL,
+  `kode_dok` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -63,9 +65,9 @@ CREATE TABLE `ket_langkah` (
 --
 
 --
--- Indexes for table `gbr_langkah`
+-- Indexes for table `gbr_dok`
 --
-ALTER TABLE `gbr_langkah`
+ALTER TABLE `gbr_dok`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -75,9 +77,9 @@ ALTER TABLE `judul_dok`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `ket_langkah`
+-- Indexes for table `ket_dok`
 --
-ALTER TABLE `ket_langkah`
+ALTER TABLE `ket_dok`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -85,22 +87,22 @@ ALTER TABLE `ket_langkah`
 --
 
 --
--- AUTO_INCREMENT for table `gbr_langkah`
+-- AUTO_INCREMENT for table `gbr_dok`
 --
-ALTER TABLE `gbr_langkah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+ALTER TABLE `gbr_dok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `judul_dok`
 --
 ALTER TABLE `judul_dok`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `ket_langkah`
+-- AUTO_INCREMENT for table `ket_dok`
 --
-ALTER TABLE `ket_langkah`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+ALTER TABLE `ket_dok`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,10 +1,16 @@
 <?php
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
 session_start();
 
 // Inisialisasi counter
 if (!isset($_SESSION['counter'])) {
     $_SESSION['counter'] = 0;
 }
+
 
 // Menggabungkan ke database
 $host = "localhost";
@@ -22,21 +28,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $kode = $_GET['kode'];
     $counter = $_SESSION['counter'] + 1;
     $_SESSION['counter'] = $counter;
-
     $gambar = $_FILES['gambar'];
     $keterangan = $_POST['keterangan'];
+    if (intlen($counter) == 1) {
+        $kode_counter = "0" . $counter;
+    }else{
+        $kode_counter = $counter;
+    }
 
-    $nama_gambar = $kode . '-gbr' . $counter . '.png';
-    $kode_gambar = $kode . '-gbrket' . $counter . '.png';
+    $nama_gambar = $kode . '-gbr' . $kode_counter . '.png';
+    $kode_gambar = $kode . '-gbr' . $kode_counter;
     // Upload gambar ke server
     $target_directory = "../upload/dokumentasi/"; // Folder untuk menyimpan gambar
     $target_file = $target_directory . basename($nama_gambar);
 
     if (move_uploaded_file($gambar['tmp_name'], $target_file)) {
         // Gambar berhasil diunggah
-        $kode_ket = $kode . '-ket' . $counter;
-        $queryGbr = "INSERT INTO gbr_langkah (kode, nama) VALUES ('$kode_gambar', '$nama_gambar')";
-        $queryKet = "INSERT INTO ket_langkah (kode, keterangan) VALUES ('$kode_ket', '$keterangan')";
+        $kode_ket = $kode . '-ket' . $kode_counter;
+        $queryGbr = "INSERT INTO gbr_dok (kode_gambar, nama, kode_dok) VALUES ('$kode_gambar', '$nama_gambar', '$kode')";
+        $queryKet = "INSERT INTO ket_dok (kode_ket, keterangan, kode_dok) VALUES ('$kode_ket', '$keterangan', '$kode')";
         
         if ($conn->query($queryGbr) === TRUE && $conn->query($queryKet) === TRUE) {
             // Data berhasil disimpan
@@ -89,7 +99,7 @@ if (isset($_POST['selesai'])) {
 
             // Tindakan saat tombol "Selesai" ditekan
             selesaiButton.addEventListener("click", function () {
-                window.location.href = "index.php"; // Mengarahkan ke halaman index.php
+                window.location.href = "selesai.php"; // Mengarahkan ke halaman index.php
             });
         });
     </script>
@@ -98,7 +108,7 @@ if (isset($_POST['selesai'])) {
 <body>
     <header>
         <h1>Form Tutorial</h1>
-        <p id="counter">Langkah ke-<?php echo $_SESSION['counter']; ?></p>
+        <p id="counter">Langkah ke-<?php echo $_SESSION['counter']+1; ?></p>
     </header>
     <form action="<?php echo $_SERVER['PHP_SELF'] . '?kode=' . $_GET['kode']; ?>" method="post" enctype="multipart/form-data">
         <div class="form-part">
@@ -106,8 +116,8 @@ if (isset($_POST['selesai'])) {
             <textarea name="keterangan" placeholder="Keterangan"></textarea>
         </div>
         <button type="submit" name="simpan" id="simpan">Simpan</button>
+        <div id="response"><?php echo isset($response) ? $response : ''; ?></div>
     </form>
     <button id="selesai">Selesai</button>
-    <div id="response"><?php echo isset($response) ? $response : ''; ?></div>
 </body>
 </html>
