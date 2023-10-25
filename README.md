@@ -1,14 +1,14 @@
 # web_doc
 Website untuk membuat tutorial atau dokumentasi
 
-#Clone:
+Clone:
 - git clone https://github.com/dimascahyo/web_doc.git
 
-#Commit
+Commit:
 - git pull origin master
 - git add .
-- git commit -M "komentar commit"
-- git push origin origin master
+- git commit -m "komentar commit"
+- git push origin master
 
 
 
